@@ -1,0 +1,36 @@
+﻿@model DateViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@using (Html.BeginForm("Post", "Date", FormMethod.Post))
+{
+    <div style="padding-bottom: 10px">
+        Start Date: @Html.TextBoxFor(m => m.StartDate)
+        @Html.ValidationMessageFor(m => m.StartDate)
+    </div>
+    <div style="padding-bottom: 10px">
+        End Date: @Html.TextBoxFor(m => m.EndDate)
+        @Html.ValidationMessageFor(m => m.EndDate)
+    </div>
+    <div style="padding-bottom: 10px">
+        <input type="submit" value="Get Difference" />
+    </div>
+}
+
+@if (Model != null && !string.IsNullOrEmpty(Model.StartDate) && !string.IsNullOrEmpty(Model.EndDate) && string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div>
+        Diffrence between the two dates is @Model.Difference days.
+    </div>
+}
+
+@if (Model != null && !string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div>
+        Validation Error: @Model.ErrorMessage
+    </div>
+    <div>Please correct the error and try again. </div>
+}
+
